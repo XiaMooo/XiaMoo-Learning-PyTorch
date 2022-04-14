@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 import torch
-from MNIST import ConvNet
+from MNIST_TRAIN import ConvNet
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
