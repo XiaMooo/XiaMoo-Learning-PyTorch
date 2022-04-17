@@ -65,7 +65,7 @@ if __name__ == '__main__':
             print(f"epoch {epoch}: loss {mse_loss:.4f}")
         epoch += 1
 
-    torch.save(model.state_dict(), "iris.pth")
+    torch.save(model.state_dict(), "MultipleClassifier-Iris.pth")
 
     with torch.no_grad():
         inputs = torch.from_numpy(x_test).to(device)
@@ -76,7 +76,7 @@ if __name__ == '__main__':
             print(yi_test[i], y_pred[i].index(max(y_pred[i])), y_pred[i])
 
     model.eval()
-    torch.save(model, "iris.pth")
+    torch.save(model, "MultipleClassifier-Iris.pth")
     dummy_input = torch.randn(1, 10, requires_grad=True).to(device)
-    torch.onnx.export(model, dummy_input, "iris.onnx", verbose=True, opset_version=13, input_names=["input"],
+    torch.onnx.export(model, dummy_input, "MultipleClassifier-Iris.onnx", verbose=True, opset_version=13, input_names=["input"],
                       output_names=["output"])

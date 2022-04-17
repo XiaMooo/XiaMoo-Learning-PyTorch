@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 import torch
-from MNIST import ConvNet
+from MNIST_TRAIN import ConvNet
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -11,7 +11,7 @@ norm = np.zeros((28, 28), dtype=np.float32)
 
 window_name = "XiaMoo MNIST Viewer"
 square_size = 22
-pen_size = 42
+pen_size = 35
 drawing = False
 mode = True
 
