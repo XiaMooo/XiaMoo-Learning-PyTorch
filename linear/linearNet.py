@@ -19,11 +19,11 @@ def my_pow(x):
 class Net(nn.Module):
     def __init__(self):
         super(Net, self).__init__()
-        self.hidden_layer1 = torch.nn.Linear(1, 100)
-        self.hidden_layer2 = torch.nn.Linear(100, 100)
-        self.hidden_layer3 = torch.nn.Linear(100, 100)
-        self.hidden_layer4 = torch.nn.Linear(100, 100)
-        self.output_layer = torch.nn.Linear(100, 1)
+        self.hidden_layer1 = nn.Linear(1, 100)
+        self.hidden_layer2 = nn.Linear(100, 100)
+        self.hidden_layer3 = nn.Linear(100, 100)
+        self.hidden_layer4 = nn.Linear(100, 100)
+        self.output_layer = nn.Linear(100, 1)
 
     def forward(self, x):
         # x = F.leaky_relu(self.hidden_layer1(x), 0.05)
@@ -44,11 +44,11 @@ if __name__ == '__main__':
     print(model.parameters())
 
     criterion = nn.MSELoss()
-    epochs = 3000
+    epochs = 6000
 
     x = np.random.randint(-1600, 1600, size=(50, 1)) / 100
     noise = np.random.rand(50, 1)
-    y = my_pow(x) + noise * 5
+    y = SiLU(x) + noise * 1
 
     x_train = x.astype(np.float32)
     y_train = y.astype(np.float32)
@@ -68,9 +68,11 @@ if __name__ == '__main__':
     with torch.no_grad():
         inputs = torch.from_numpy(np.linspace(-16, 16, 1000).reshape(-1, 1).astype(np.float32)).to(device)
         outputs = model(inputs)
+        plt.rcParams['xtick.direction'] = 'in'#将x周的刻度线方向设置向内
+        plt.rcParams['ytick.direction'] = 'in'#将y轴的刻度方向设置向内
 
         xl = np.linspace(-16, 16, 1000)
-        yl = my_pow(xl)
+        yl = SiLU(xl)
         y_pred = outputs.cpu().numpy()
         plt.plot(xl, yl)
         plt.scatter(x, y, s=2, alpha=0.5, c="g")
