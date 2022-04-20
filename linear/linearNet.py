@@ -19,11 +19,11 @@ def my_pow(x):
 class Net(nn.Module):
     def __init__(self):
         super(Net, self).__init__()
-        self.hidden_layer1 = torch.nn.Linear(1, 100)
-        self.hidden_layer2 = torch.nn.Linear(100, 100)
-        self.hidden_layer3 = torch.nn.Linear(100, 100)
-        self.hidden_layer4 = torch.nn.Linear(100, 100)
-        self.output_layer = torch.nn.Linear(100, 1)
+        self.hidden_layer1 = nn.Linear(1, 100)
+        self.hidden_layer2 = nn.Linear(100, 100)
+        self.hidden_layer3 = nn.Linear(100, 100)
+        self.hidden_layer4 = nn.Linear(100, 100)
+        self.output_layer = nn.Linear(100, 1)
 
     def forward(self, x):
         # x = F.leaky_relu(self.hidden_layer1(x), 0.05)
